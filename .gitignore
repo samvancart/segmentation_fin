@@ -1,4 +1,8 @@
 # Folders
 data/
+batch_jobs/
+
+# Env
+.Renviron
 
 
