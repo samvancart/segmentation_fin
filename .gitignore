@@ -5,4 +5,7 @@ batch_jobs/
 # Env
 .Renviron
 
+# Files
+code.txt
+
 

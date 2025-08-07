@@ -22,22 +22,11 @@ gdb_path <- "data/kuviointi.gdb"
 available_gdb_layers <- st_layers(gdb_path) # List layers
 
 layer_id <- args$array_id # Choose layer based on array job id
+
 layer <- available_gdb_layers$name[layer_id]
 
 # Read layer as sf
 seg_data_sf <- st_read(gdb_path, layer = layer)
-
-
-# SET CRS -----------------------------------------------------------------
-
-
-st_crs(seg_data_sf) <- 3067 # Set CRS to EPSG:3067 (ETRS-TM35FIN)
-
-
-# GDB TO CENTROIDS --------------------------------------------------------
-
-
-seg_data_sf_centroids <- st_centroid(seg_data_sf) # Multipolygon to centroids
 
 
 # LOAD REGION FIN DATA ----------------------------------------------------
@@ -46,6 +35,18 @@ seg_data_sf_centroids <- st_centroid(seg_data_sf) # Multipolygon to centroids
 regions_fin_path <- "data/regions_fin/"
 
 regions_fin_sf <- st_read(regions_fin_path)
+
+
+# SET CRS -----------------------------------------------------------------
+
+
+seg_data_sf <- st_set_crs(seg_data_sf, st_crs(regions_fin_sf)) # Set CRS to EPSG:3067 (ETRS-TM35FIN) from regions_fin_sf
+
+
+# GDB TO CENTROIDS --------------------------------------------------------
+
+
+seg_data_sf_centroids <- st_centroid(seg_data_sf) # Multipolygon to centroids
 
 
 # ASSIGN REGION IDS TO CENTROIDS ------------------------------------------
