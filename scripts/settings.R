@@ -6,6 +6,7 @@ require(sf)
 require(data.table)
 require(optparse)
 require(aws.s3)
+require(terra)
 
 
 # PARSE ARGS --------------------------------------------------------------
