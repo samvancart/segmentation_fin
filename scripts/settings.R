@@ -7,6 +7,7 @@ require(data.table)
 require(optparse)
 require(aws.s3)
 require(terra)
+require(checkmate)
 
 
 # PARSE ARGS --------------------------------------------------------------
