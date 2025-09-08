@@ -1,3 +1,5 @@
+# Convert area to ha and species proportions to %.
+
 
 # SOURCE FILES ------------------------------------------------------------
 
