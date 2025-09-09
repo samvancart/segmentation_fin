@@ -2,12 +2,13 @@
 # LOAD LIBS ---------------------------------------------------------------
 
 
-require(sf)
+require(RANN)
+require(aws.s3)
+require(checkmate)
 require(data.table)
 require(optparse)
-require(aws.s3)
+require(sf)
 require(terra)
-require(checkmate)
 
 
 # PARSE ARGS --------------------------------------------------------------

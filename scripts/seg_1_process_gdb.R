@@ -29,6 +29,19 @@ layer <- available_gdb_layers$name[layer_id]
 seg_data_sf <- st_read(gdb_path, layer = layer)
 
 
+# CREATE LOOKUP FOR LAYERS ------------------------------------------------
+
+
+layer_lookup_path <- "data/gdb_layers/layer_lookup.csv"
+
+layer_lc_names <- tolower(available_gdb_layers$name)
+layer_clean_names <- unlist(tstrsplit(layer_lc_names, split = "_", keep = 1))
+layer_lookup_dt <- data.table(layer = layer_clean_names)
+layer_lookup_dt[, id := .GRP, by = layer]
+
+fwrite(layer_lookup_dt, layer_lookup_path)
+
+
 # LOAD REGION FIN DATA ----------------------------------------------------
 
 

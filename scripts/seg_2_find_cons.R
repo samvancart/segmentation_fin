@@ -3,6 +3,8 @@
 # value 1 = conservation area and 0 = not a conservation area.
 # Run as array job.
 
+# DON'T RUN!! This is for the old conservation areas 
+
 
 # SOURCE FILES ------------------------------------------------------------
 

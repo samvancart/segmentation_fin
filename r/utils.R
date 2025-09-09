@@ -243,3 +243,35 @@ list_all_objects_in_bucket <- function(only_keys = F, ...) {
 
 
 
+
+# KNN ---------------------------------------------------------------------
+
+
+# Helper function to project lat/lon data to a specified CRS
+seg_project_coords <- function(dt, lon_col = "lon", lat_col = "lat" , crs_proj = 3067) {
+  stopifnot(lat_col %in% names(dt), lon_col %in% names(dt))
+  
+  sf_obj <- st_as_sf(dt, coords = c(lon_col, lat_col), crs = 4326)
+  sf_proj <- st_transform(sf_obj, crs_proj)
+  coords <- st_coordinates(sf_proj)
+  
+  return(coords)
+}
+
+# Main function to find k nearest neighbors
+seg_find_kNN <- function(data_dt, query_dt, crs_proj = 3067, k = 1, lon_col = "lon", lat_col = "lat", is_lonlat = TRUE) {
+  # Project data_dt if it's in lat/lon
+  coords_A <- if (is_lonlat) {
+    seg_project_coords(data_dt, lat_col, lon_col, crs_proj)
+  } else {
+    as.matrix(data_dt[, c("x", "y")])
+  }
+  
+  # Query coordinates assumed to be in projected CRS
+  coords_B <- as.matrix(query_dt[, c("x", "y")])
+  
+  # Find nearest neighbors
+  nn_result <- nn2(data = coords_A, query = coords_B, k = k)
+  
+  return(nn_result$nn.idx)
+}
