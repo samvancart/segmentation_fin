@@ -66,7 +66,9 @@ setnames(seg_dt, old = old_col_names, new = new_col_names)
 # SAVE TO ALLAS -----------------------------------------------------------
 
 
-r_out_name <- paste0("seg_fin_", layer_id, ".rds")
+reg_name <- unique(seg_dt$regName)[1]
+
+r_out_name <- paste0("seg_fin_", layer_id, "_", reg_name, ".rds")
 
 obj <- file.path("output", "clean", "seg_fin_dts", r_out_name)
 
